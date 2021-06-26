@@ -1,0 +1,25 @@
+
+{% extends 'app/base.html' %}
+{% block content %}
+<table class="table table-hover  mt-5 text-center">
+            <thead class="bg-light text-secondary">
+                <tr>
+                    <th>ID</th>
+                    <th>Profile</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% if user.is_superuser %}
+                <tr>
+                    <td>{{login.id}}</td>
+                    <td>{{login.profile}}</td>
+                    <td>{{login.username}}</td>
+                    <td>{{password}}</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+{% endblock content %}

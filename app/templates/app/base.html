@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+   
+    
+    
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/main.css' %}">
+
+
+    
+
+    {% if title %}
+        <title>Password - {{ title }}</title>
+    {% else %}
+        <title>Password</title>
+    {% endif %}
+</head>
+<body>
+    <header class="site-header p-3">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top p-3">
+        <div class="container">
+          <a class="navbar-brand mr-5" href="#"><i class="fa fa-unlock-alt"></i>Password</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{% url 'home' %}"><i class="fa fa-home"></i>Home</a>
+              
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              {% if user.is_authenticated %}
+              <a class="nav-item nav-link"><i class="fa fa-users"></i>{{user}}</a>
+              <a class="nav-item nav-link" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>Logout</a>
+              {% else %}
+                <a class="nav-item nav-link" href="{% url 'signin' %}"><i class="fa fa-sign-in"></i>Login</a>
+                <a class="nav-item nav-link" href="{% url 'signup' %}"><i class="fa fa-desktop"></i>Register</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <div class="row">
+          {% comment %} <div class="col-3"></div> {% endcomment %}
+          {% comment %} <div class="col-6">{% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}</div> {% endcomment %}
+            </div> 
+          {% comment %} <div class="row"> {% endcomment %}
+        <!-- <div class="col-md-12"> -->
+       
+          
+          {% block content %}
+          
+          {% endblock %}
+
+         
+
+    
+      </div>
+    </main>
+
+ 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{% static 'app/js/main.js' %}"></script>
+<script>
+
+    {% for message in messages %}
+      swal('{{ message  }}');
+    {% endfor %}
+
+</script>
+
+                        
+  
+</body>
+</html>

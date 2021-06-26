@@ -1,0 +1,72 @@
+{% extends 'app/base.html' %}
+{% block content %}
+
+        <table class="table  mt-5">
+    
+            <thead class="bg-light text-secondary text-center">
+                <tr>
+                    <th>ID</th>
+                    <th>Profile</th>
+                    <th>Username</th>
+                    {% if user.is_superuser %}
+                    <th>Password</th>
+                    {% endif %}
+                    <th>Option</th>
+                    {% if user.is_superuser %}
+                    <th>Delete</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                {% if user.is_superuser %}
+                {% for l in login %}
+                <tr>
+
+                    <td>{{l.id}}</td>
+                    <td>{{l.profile}}</td>
+                    <td>{{l.username}}</td>
+                    <td><a href="{% url 'detail' l.id %}"><button class="btn  btn-outline-secondary rounded-pill p-1.5" >Decrypt</button></a></td>
+                    <td><a href="{% url 'sharepass' l.id %}"><button class="btn  btn-outline-warning rounded-pill"><i class="fa fa-edit"></i>Edit Assigned users</button></a></td>
+                    <td><a href="{% url 'delete' l.id %}"  onclick="del()"><i class="fa fa-trash fa-2x hover text-danger" ></i></a></td>
+            
+                </tr>
+                
+                {% endfor %}
+              
+                {% else  %}
+
+                {% for l in assigned_pass %}
+                <tr>
+                    <td>{{l.id}}</td>
+                    <td>{{l.profile}}</td>
+                    <td>{{l.username}}</td>
+                    <!-- <td>{{l.password}}</td> -->
+                    <td><a href="{% url 'login' l.id %}"><button class="btn  btn-outline-danger rounded-pill">Login</button></a></td>
+                </tr>
+                {% endfor %}
+                {% endif %}       
+               
+                
+            </tbody>
+                 
+                  
+                
+        </table>
+           <div class=" container mt-5">
+                   {% if user.is_superuser %}
+                    <div class="float-right">
+                    
+                     <a href="{% url 'form' %}" ><button class="btn  btn-outline-info p-2"><i class="fa fa-plus"></i>Add Pofile</button></a>   
+                    </div>          
+                   {% endif %}
+        
+            </div>
+
+          
+    
+        
+
+
+  
+ <!-- </div> -->
+{% endblock content %}
